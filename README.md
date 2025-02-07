@@ -89,3 +89,15 @@ To fix any lint issues, use `npm run format` to automatically format all the cod
 - [Tailwind](https://tailwindcss.com): CSS framework for design and styling.
 - [ESLint](https://eslint.org): Statically analyze code to quickly find problems.
 - [Prettier](https://prettier.io): Opinionated code formatter.
+
+
+
+
+
+
+
+SolarMortgage  Calculator 
+The calculator is in a prototype build. In the current build a value for mortgage, taxes, insurance, energy invoicing, and solar loan payments calculates slightly higher than mortgage, taxes,insurance, and energy invoicing without solar.
+
+The calculator displays a negative savings number and does not properly reflect extra principle payments following solar loan payoff.
+
