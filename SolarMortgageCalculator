@@ -1,0 +1,101 @@
+from IPython.display import HTML
+
+html_code = """
+<!DOCTYPE html>
+<html>
+<head>
+<title>Solar Mortgage Calculator</title>
+<style>
+  /* Basic Styling - Customize as needed */
+  body {font-family: sans-serif;}
+  label {display: block; margin-bottom: 5px;}
+  input[type="number"] {width: 150px;}
+  #results {margin-top: 20px;}
+</style>
+</head>
+<body>
+
+  <h1>Solar Mortgage Calculator</h1>
+
+  <label for="homePrice">Home Price:</label>
+  <input type="number" id="homePrice" value="375000"><br><br>
+
+  <label for="downPayment">Down Payment (%):</label>
+  <input type="number" id="downPayment" value="20"><br><br>
+
+  <label for="interestRate">Mortgage Interest Rate (%):</label>
+  <input type="number" id="interestRate" value="6"><br><br>
+
+  <label for="loanTerm">Loan Term (Years):</label>
+  <input type="number" id="loanTerm" value="30"><br><br>
+
+  <label for="annualTaxInsurance">Annual Taxes & Insurance:</label>
+  <input type="number" id="annualTaxInsurance" value="6000"><br><br>
+
+  <label for="monthlyElectricity">Monthly Electricity (without solar):</label>
+  <input type="number" id="monthlyElectricity" value="200"><br><br>
+
+  <label for="solarCost">Solar System Cost:</label>
+  <input type="number" id="solarCost" value="15000"><br><br>
+
+  <label for="solarLoanRate">Solar Loan Interest Rate (%):</label>
+  <input type="number" id="solarLoanRate" value="5"><br><br>
+
+  <label for="solarLoanTerm">Solar Loan Term (Years):</label>
+  <input type="number" id="solarLoanTerm" value="10"><br><br>
+
+  <label for="monthlyElectricitySolar">Monthly Electricity Bill (with solar):</label>
+  <input type="number" id="monthlyElectricitySolar" value="50"><br><br>
+
+  <button onclick="calculate()">Calculate</button>
+
+  <div id="results">
+  </div>
+
+  <script>
+    function calculate() {
+        // Input values
+        const homePrice = parseFloat(document.getElementById('homePrice').value);
+        const downPaymentPercent = parseFloat(document.getElementById('downPayment').value) / 100;
+        const interestRate = parseFloat(document.getElementById('interestRate').value) / 100 / 12;
+        const loanTermMonths = parseFloat(document.getElementById('loanTerm').value) * 12;
+        const annualTaxInsurance = parseFloat(document.getElementById("annualTaxInsurance").value);
+        const monthlyElectricity = parseFloat(document.getElementById("monthlyElectricity").value);
+        const solarCost = parseFloat(document.getElementById("solarCost").value);
+        const solarLoanRate = parseFloat(document.getElementById("solarLoanRate").value) / 100 / 12;
+        const solarLoanTermMonths = parseFloat(document.getElementById("solarLoanTerm").value) * 12;
+        const monthlyElectricitySolar = parseFloat(document.getElementById("monthlyElectricitySolar").value)
+
+         //Calculations
+
+         const principal = homePrice * (1 - downPaymentPercent);
+         const monthlyMortgage = (principal * interestRate) / (1 - Math.pow(1 + interestRate,-loanTermMonths));
+         const monthlyTaxInsurance = annualTaxInsurance / 12;
+         const totalMonthlyCostNoSolar = monthlyMortgage + monthlyTaxInsurance + monthlyElectricity;
+
+
+
+         const monthlySolarPayment = (solarCost * solarLoanRate) / (1 - Math.pow(1+ solarLoanRate,-solarLoanTermMonths));
+
+         const totalMonthlyCostSolar = monthlyMortgage + monthlyTaxInsurance + monthlyElectricitySolar + monthlySolarPayment;
+         const savings = totalMonthlyCostNoSolar-totalMonthlyCostSolar;
+
+
+
+       // Display results
+      let resultsDiv = document.getElementById("results");
+      resultsDiv.innerHTML = `
+          <p>Monthly Mortgage Payment (without solar): ${monthlyMortgage.toFixed(2)}</p>
+          <p>Total Monthly Cost (without solar): ${totalMonthlyCostNoSolar.toFixed(2)}</p>
+          <p>Estimated Monthly Solar Loan Payment: ${monthlySolarPayment.toFixed(2)}</p>
+          <p>Total Monthly Cost (with solar): ${totalMonthlyCostSolar.toFixed(2)}</p>
+          <p>Monthly Savings: ${savings.toFixed(2)}</p>
+          `;  // Add other output values
+
+    }
+  </script>
+
+</body>
+</html>
+"""
+display(HTML(html_code))
