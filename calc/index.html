@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mortgage & Solar Early Payoff Calculator</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <h1>Mortgage & Solar Early Payoff Calculator</h1>
+  <form id="calcForm">
+    <fieldset>
+      <legend>Mortgage Details</legend>
+      <label for="mortgagePrincipal">Mortgage Principal ($):</label>
+      <input type="number" id="mortgagePrincipal" name="mortgagePrincipal" step="0.01" required />
+      <label for="mortgageRate">Mortgage Annual Interest Rate (%):</label>
+      <input type="number" id="mortgageRate" name="mortgageRate" step="0.01" required />
+      <label for="mortgageTerm">Mortgage Term (Years):</label>
+      <input type="number" id="mortgageTerm" name="mortgageTerm" step="1" required />
+      <label for="extraMortgage">Extra Payment on Mortgage ($/month):</label>
+      <input type="number" id="extraMortgage" name="extraMortgage" step="0.01" value="0" />
+    </fieldset>
+    <fieldset>
+      <legend>Solar Details</legend>
+      <label for="solarCost">Solar System Cost ($):</label>
+      <input type="number" id="solarCost" name="solarCost" step="0.01" required />
+      <label for="solarRate">Solar Annual Interest Rate (%):</label>
+      <input type="number" id="solarRate" name="solarRate" step="0.01" required />
+      <label for="solarTerm">Solar Loan Term (Years):</label>
+      <input type="number" id="solarTerm" name="solarTerm" step="1" required />
+      <label for="energySavings">Monthly Energy Savings ($):</label>
+      <input type="number" id="energySavings" name="energySavings" step="0.01" required />
+    </fieldset>
+    <button type="button" onclick="calculatePayoff()">Calculate</button>
+  </form>
+  
+  <div id="results"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
